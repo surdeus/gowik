@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"html/template"
 	"regexp"
+	"github.com/gomarkdown/markdown"
 )
 
 
@@ -16,7 +17,7 @@ type HttpHandler struct {
 
 type Page struct {
 	Title string
-	Body []byte
+	Body template.HTML
 }
 
 var stdHostString = ":8080"
@@ -34,7 +35,7 @@ getPageFilename(t string) string {
 func
 (p *Page)save() error {
 	filename := getPageFilename(p.Title)
-	return ioutil.WriteFile(filename, p.Body, 0600)
+	return ioutil.WriteFile(filename, []byte(p.Body), 0600)
 }
 
 func
@@ -44,7 +45,7 @@ getPage(t string) (*Page, error) {
 	if e!=nil {
 		return nil, e
 	}
-	return &Page{Title: t, Body: b}, nil
+	return &Page{Title: t, Body: template.HTML(b)}, nil
 }
 
 func
@@ -66,6 +67,7 @@ viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
 		return
 	}
+	p.Body = template.HTML(markdown.ToHTML( []byte(p.Body), nil, nil))
 	renderTemplate(w, "view", p)
 }
 
@@ -82,7 +84,7 @@ editHandler(w http.ResponseWriter, r *http.Request, title string) {
 func
 saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 	body := r.FormValue("body")
-	p := &Page{Title: title, Body: []byte(body)}
+	p := &Page{Title: title, Body: template.HTML(body)}
 
 	e := p.save()
 	if e!=nil {
@@ -102,10 +104,16 @@ renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 }
 
 func
+rootHandler(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/view/home", http.StatusFound)
+}
+
+func
 main() {
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
+	http.HandleFunc("/", rootHandler)
 
 	log.Fatal(http.ListenAndServe(stdHostString, nil))
 }
