@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edit {{.Title}}</title>
+  <title>edit {{.User}}/{{.Title}}</title>
 </head>
 <body>
-<h1>Editing {{.Title}}</h1>
-<form action="/save/{{.Title}}" method="POST">
+<h1>Editing "{{.Title}}"</h1>
+<form action="/save/{{.User}}/{{.Title}}" method="POST">
   <div>
     <textarea name="body" rows="20" cols="80">{{printf "%s" .Body}}</textarea>
   </div>
+  <div>Login: {{.User}}</div>
+  <div>Password: <input name="password" type="password"></div>
   <div><input type="submit" value="Save">
   </div>
 </form>
