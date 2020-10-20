@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{.User}}/{{.Title}}</title>
+</head>
+<body>
+<h1>{{.User}}/{{.Title}}</h1>
+<p>
+  [<a href="/edit/{{.User}}/{{.Title}}">edit</a>]
+</p>
+{{.Body}}
+</body>
+</html>
