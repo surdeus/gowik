@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Editing "{{.Title}}"</h1>
-<form action="/save/{{.User}}/{{.Title}}" method="POST">
+<form action="/page/save/{{.User}}/{{.Title}}" method="POST">
   <div>
     <textarea name="body" rows="20" cols="80">{{printf "%s" .Body}}</textarea>
   </div>

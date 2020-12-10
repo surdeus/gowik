@@ -1,11 +1,13 @@
-# gowik
+gowik
+=====
 
 *gowik* is a page control system. Pages are written in Markdown.
 The page is root for site. You can edit it with the "1234" password.
 It's set by default. Any user can create user by creating his first
-page. Creating page URI template "/edit/[user]/[page]".
+page. Creating page URI template "/page/edit/[user]/[page]".
 
 All what this service does is about serving text files. Everything else is supposed to be done by links to other resources.
 Like that:
+
 ![example](https://images.squarespace-cdn.com/content/v1/5a5906400abd0406785519dd/1547305849352-CYT6FWXR75U7ZUBL5NAK/ke17ZwdGBToddI8pDm48kKAwwdAfKsTlKsCcElEApLR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UegTYNQkRo-Jk4EWsyBNhwKrKLo5CceA1-Tdpfgyxoog5ck0MD3_q0rY3jFJjjoLbQ/IB+alex.jpg?format=1000w)
 

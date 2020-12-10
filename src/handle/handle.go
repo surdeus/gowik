@@ -14,7 +14,7 @@ import(
 
 var ValidPagePath = regexp.MustCompile("^/page/(edit|save|view)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_]+)$")
 var ValidUserPath = regexp.MustCompile("^/user/(edit|save|make)/([a-zA-Z0-9_-]+)$")
-var RootPath = "/view/admin/home"
+var RootPath = "/page/view/admin/home"
 
 func
 MakePageHandler(fn func(http.ResponseWriter, *http.Request, string, string) ) http.HandlerFunc {
